@@ -5,18 +5,18 @@
       <h4>A place to store the things you have to do!</h4>
     </header>
     <div class="container">
-      <input class="filter" type="text" placeholder="Filter your to-dos" />
+      <input class="filter" type="text" placeholder="Filter your to-dos" [(ngModel)]="filterTask" (input)="filterTaskItems()" />
       <div class="list">
         <ol>
-            <li *ngFor="let task of tasks">
-          <button type="button" class="complete" (click)="doneClicked()" *ngIf="!task.completed">Complete</button>
+            <li *ngFor="let task of filteredTaskItems; let i =index">
+          <button type="button" class="complete" (click)="completeTask(task)" *ngIf="!task.completed">Complete</button>
           <span [ngClass]="{strike: task.completed}">{{task.task}}</span>
-          <button type="button" class="remove" (click)="removeTask()">X</button>
+          <button type="button" class="remove" (click)="removeTask(task)">X</button>
         </li>
         </ol>
       </div>
       <input class="add" type="text" placeholder="Add your to do" [(ngModel)]="newTask" /> <br>
-      <button type="button" class="add-button" (click)="Add()">Add</button>
+      <button type="button" class="add-button" (click)="addTask()">Add</button>
     </div>
     </div>
     </div>
